@@ -11,3 +11,9 @@
     border: 2px solid white;
     background-color: black;
 }
+
+.divRender {
+    height: 200px;
+    width: 200px;
+    background-color: pink
+}
