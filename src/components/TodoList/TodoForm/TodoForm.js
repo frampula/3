@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './TodoFormStyle.module.css'
+import cx from 'classnames'
 
 class TodoForm extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class TodoForm extends Component {
             })
         } else {
             this.setState({
-                [name]: value,
+                [name]: value,  // С этим тоже трошки непонятно
                 isInputValid: true
             })
         }
@@ -42,7 +43,7 @@ class TodoForm extends Component {
 
         const className = cx({
             [styles.input]: true,
-            [styles['invalid-input']]: !isInputValid
+            [styles['invalid-input']]: !isInputValid      // Как это работает
         })
 
         return (
@@ -64,14 +65,14 @@ class TodoForm extends Component {
 export default TodoForm;
 
 
-function cx(objectClassNames) {
-    // const cort = Object.entries(objectClassNames);
-    // const filteredArray = cort.filter(([className, condition]) => condition);
-    // const mapArray = filteredArray.map(([className, condition]) => className)
-    // return mapArray.join(' ');
+// function cx(objectClassNames) {
+//     // const cort = Object.entries(objectClassNames);
+//     // const filteredArray = cort.filter(([className, condition]) => condition);
+//     // const mapArray = filteredArray.map(([className, condition]) => className)
+//     // return mapArray.join(' ');
 
-    return Object.entries(objectClassNames)
-    .filter(([className, condition]) => condition)
-    .map(([className, condition]) => className)
-    .join(' ');
-}
+//     return Object.entries(objectClassNames)
+//     .filter(([className, condition]) => condition)
+//     .map(([className, condition]) => className)
+//     .join(' ');
+// }
