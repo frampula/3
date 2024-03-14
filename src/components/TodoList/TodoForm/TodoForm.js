@@ -6,14 +6,22 @@ class TodoForm extends Component {
         super(props);
         
         this.state = {
-            taskText: ''
+            taskText: '',
+            isInputValid: true,
         }
     }
 
     changeHandler = ({ target: {value, name} }) => {
-        this.setState({
-            [name]: value
-        })
+        if(value.includes('*')) {
+            this.setState ({
+                isInputValid: false
+            })
+        } else {
+            this.setState({
+                [name]: value,
+                isInputValid: true
+            })
+        }
     }
 
     submitHandler = (event) => {
@@ -30,11 +38,23 @@ class TodoForm extends Component {
     }
     
     render() {
-        const { taskText } = this.state
+        const { taskText, isInputValid } = this.state
+
+        const className = cx({
+            [styles.input]: true,
+            [styles['invalid-input']]: !isInputValid
+        })
 
         return (
             <form onSubmit={this.submitHandler} className={styles.container}>
-                <input type='text' value={taskText} name='taskText' onChange={this.changeHandler}/>
+                <input 
+                type='text' 
+                // className={isInputValid ? '' : styles['invalid-input']} 
+                className={className}
+                value={taskText} 
+                name='taskText' 
+                onChange={this.changeHandler}
+                />
                 <button type='submit'>Add task</button>
             </form>
         );
@@ -42,3 +62,16 @@ class TodoForm extends Component {
 }
 
 export default TodoForm;
+
+
+function cx(objectClassNames) {
+    // const cort = Object.entries(objectClassNames);
+    // const filteredArray = cort.filter(([className, condition]) => condition);
+    // const mapArray = filteredArray.map(([className, condition]) => className)
+    // return mapArray.join(' ');
+
+    return Object.entries(objectClassNames)
+    .filter(([className, condition]) => condition)
+    .map(([className, condition]) => className)
+    .join(' ');
+}
