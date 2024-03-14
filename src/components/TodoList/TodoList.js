@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import TodoForm from "./TodoForm";
+import TodoForm from "./TodoForm/TodoForm";
+import styles from './TodoListStyle.module.css'
 
 class TodoList extends React.Component {
   constructor(props) {
@@ -62,7 +63,7 @@ class TodoList extends React.Component {
       <>
         <h1>TODOLIST</h1>
         <TodoForm sendData={this.formHandler}/>
-        <ul>{this.renderLi()}</ul>
+        <ul className={styles.container}>{this.renderLi()}</ul>
       </>
     );
   }
