@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
+import TodoForm from "./TodoForm";
 
 class TodoList extends React.Component {
   constructor(props) {
@@ -41,10 +42,26 @@ class TodoList extends React.Component {
     ));
   }
 
+  formHandler = (text) => {
+      const { TodoList } = this.state
+
+      const newObj = {
+        id: TodoList.length + 1,
+        text
+      }
+      
+      const newArr = [...TodoList, newObj]
+
+      this.setState({
+        TodoList: newArr
+      })
+  }
+
   render() {
     return (
       <>
         <h1>TODOLIST</h1>
+        <TodoForm sendData={this.formHandler}/>
         <ul>{this.renderLi()}</ul>
       </>
     );

@@ -1,10 +1,10 @@
 import React from "react";
 import UserList from "./UserList/UserList";
+import TodoForm from "./TodoList/TodoForm";
+import TodoList from "./TodoList/TodoList";
 
-class App extends React.Component {
-    render() {
-        return <UserList />
-    }
+function App() {
+  return <TodoList />;
 }
 
-export default App
+export default App;
