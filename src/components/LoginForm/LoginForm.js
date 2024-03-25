@@ -16,7 +16,7 @@ function SignUpForm(props) {
     actions.resetForm();
   };
 
-  return (
+  return (<>
     <Formik initialValues={initialState} onSubmit={handleSubmitToFormik} validationSchema={SIGN_UP_SCHEMA}>
       {(formikProps) => {
         return (
@@ -34,6 +34,7 @@ function SignUpForm(props) {
         );
       }}
     </Formik>
+    </>
   );
 }
 

@@ -1,10 +1,7 @@
 import React from "react";
-import TreeWithTheme from "./Tree/Tree";
-import { UserContext } from '../contexts/userContext';
-import { ThemeContext } from "../contexts/themeContext";
-import CONSTANTS from "../constants";
-import SignUpForm from "./LoginForm/LoginForm";
-const { THEMES } = CONSTANTS;
+import NewCounter from "../New Counter/NewCounter";
+import NewCounterFunction from "../New Counter/NewCounterFunction";
+
 
 class App extends React.Component {
     constructor(props) {
@@ -14,11 +11,10 @@ class App extends React.Component {
 
         }
     }
-
     
     render() {
         return (
-          <SignUpForm />
+          <NewCounterFunction />
         )
     }
 }
