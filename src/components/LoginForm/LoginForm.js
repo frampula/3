@@ -1,27 +1,23 @@
 import React, { Component } from "react";
-import * as yup from 'yup'
+import * as yup from "yup";
+import SIGN_UP_SCHEMA from "../../schemas";
 
 const initialState = {
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-  }
+  email: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+};
 
-  const SIGN_UP_SCHEMA = yup.object({
-    firstName: yup.string().required().min(1).max(30),
-    lastName: yup.string().required().min(1).max(30),
-    firstName: yup.string().required().email(),
-    password: yup.string().required().matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/)
-  })
 
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-        ...initialState
-    }
+      ...initialState,
+      isError: null,
+    };
   }
 
   changeHandler = ({ target: { value, name } }) => {
@@ -31,12 +27,23 @@ class SignUpForm extends Component {
   };
 
   submitHandler = (event) => {
-      event.preventDefault();
-      SIGN_UP_SCHEMA.isValidSync(initialState)
-  }
+    event.preventDefault();
+    try {
+      const userObject = SIGN_UP_SCHEMA.validateSync(this.state)
+      if (userObject) {
+        this.setState ({
+          isError:null
+        })
+      }
+    } catch(err) {
+        this.setState({
+          isError: err
+        })
+    }
+  };
 
   render() {
-    const { email, password, firstName, lastName } = this.state;
+    const { email, password, firstName, lastName, isError } = this.state;
 
     return (
       <form onSubmit={this.submitHandler}>
@@ -69,6 +76,8 @@ class SignUpForm extends Component {
           onChange={this.changeHandler}
         />
         <button>Login</button>
+
+        {isError && <p>{isError.message}</p>}
       </form>
     );
   }
