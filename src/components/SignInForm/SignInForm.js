@@ -21,19 +21,6 @@ class SignInForm extends React.Component {
     })
   }
 
-//   changeEmailHandler = (event) => {
-//     this.setState({
-//         email: event.target.value
-//     })
-    
-//   }
-//   changePasswordHandler = (event) => {
-//     this.setState({
-//         password: event.target.value
-//     })
-// }
-  
-
   render() {
     return (
       <>

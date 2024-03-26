@@ -1,6 +1,5 @@
 import React from "react";
-import NewCounter from "../New Counter/NewCounter";
-import NewCounterFunction from "../New Counter/NewCounterFunction";
+import MouseTracker from "./MouseTracker/MouseTracker";
 
 
 class App extends React.Component {
@@ -14,7 +13,7 @@ class App extends React.Component {
     
     render() {
         return (
-          <NewCounterFunction />
+          <MouseTracker />
         )
     }
 }
