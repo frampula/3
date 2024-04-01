@@ -1,16 +1,48 @@
-import React from "react";
+import { useEffect, useState, useRef } from "react";
+import { format, addSeconds } from 'date-fns'
 
-class Counter extends React.Component {
-  constructor(props) {
-    super(props);
+const Counter = () => {
+  const [time, setTime] = useState(new Date(0,0,0,0,0,0,0))
+  const [isRunning, setIsRunning] = useState(true)
+  const clearBtnRef = useRef(null)
 
-    console.log("constructor");
+  useEffect(() => {
+    clearBtnRef.current.disabled = true
+  }, [])
+
+  useEffect(() => {
+    if (isRunning) {
+    const intervalId = setInterval(() => {
+      setTime(time => addSeconds(time, 1))
+    }, 1000)
+
+    return () => {
+      clearInterval(intervalId);
+    }
+  }
+  }, [isRunning])
+
+  const switchRunning = () => {
+    setIsRunning(!isRunning)
+
+    if(isRunning) {
+      clearBtnRef.current.disabled = false
+    } else {
+      clearBtnRef.current.disabled = true
+    }
   }
 
-  render() {
-    console.log("counter");
-    return <h1>Counter</h1>;
+  const clearHandler = () => {
+    setTime(new Date(0,0,0,0,0,0,0,))
   }
+
+  return (
+    <>
+      <h1>{format(time, 'HH:mm:ss')}</h1>
+      <button onClick={switchRunning}>{isRunning === true ? 'Stop' : 'Start'}</button>
+      <button ref={clearBtnRef} onClick={clearHandler}>Clear</button>
+    </>
+  );
 }
 
 export default Counter;
